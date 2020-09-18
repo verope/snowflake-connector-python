@@ -45,6 +45,8 @@ TARGET_HOSTS = [
 ]
 
 THIS_DIR = path.dirname(path.realpath(__file__))
+# Mark every test in this module as an count test
+pytestmark = pytest.mark.repeat(10)
 
 
 def test_ocsp():
