@@ -491,7 +491,7 @@ class OCSPCache(object):
         logger.debug('writing OCSP response cache file')
         file_cache_data = {}
         ocsp.encode_ocsp_response_cache(file_cache_data)
-        with codecs.open(filename, 'w', encoding='utf-8', errors='ignore') as f:
+        with codecs.open(filename, 'w', encoding='utf-8') as f:
             json.dump(file_cache_data, f)
 
     @staticmethod
