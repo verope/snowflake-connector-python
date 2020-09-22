@@ -390,6 +390,7 @@ class OCSPCache(object):
             OCSPCache.OCSP_RESPONSE_CACHE_URI = 'file://' + path.join(
                 OCSPCache.CACHE_DIR,
                 OCSPCache.OCSP_RESPONSE_CACHE_FILE_NAME)
+            logger.debug(str(traceback.format_stack()))
         else:
             OCSPCache.OCSP_RESPONSE_CACHE_URI = ocsp_response_cache_uri
 
@@ -489,11 +490,12 @@ class OCSPCache(object):
     @staticmethod
     def write_ocsp_response_cache_file(ocsp, filename):
         """Writes OCSP Response Cache."""
-        logger.debug('writing OCSP response cache file')
+        logger.debug('writing OCSP response cache file to {}'.format(filename))
         file_cache_data = {}
         ocsp.encode_ocsp_response_cache(file_cache_data)
         with codecs.open(filename, 'w', encoding='utf-8') as f:
             json.dump(file_cache_data, f)
+        logger.debug('file exists {}'.format(path.exists(filename)))
 
     @staticmethod
     def check_ocsp_response_cache_lock_dir(filename):
